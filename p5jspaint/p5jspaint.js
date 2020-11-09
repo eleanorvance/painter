@@ -252,7 +252,7 @@ rectMode(CORNER);
 function mousePressed(){
   if(mouseX<50 && mouseY<50){
 let pic = get(canvasx,canvasst,canvasl,canvash);
-  pic.save('myPaintng.jpg');
+  pic.save('myPainting.jpg');
   noLoop();
   }else{
     loop();
