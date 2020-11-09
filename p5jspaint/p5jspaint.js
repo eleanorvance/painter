@@ -1,3 +1,6 @@
+
+
+
 var high = 600;
 var wide = 1200;
 //canvas
@@ -13,6 +16,7 @@ var canvash = high;
 var tbc = canvasx/2;
 //height
 var tbh = high;
+
 
 //color slider
   //g slider height (middle)
@@ -44,6 +48,8 @@ var tbh = high;
   var samplelocY = 75;
   var samplesize = 50;
   var num=20;
+  //sample bg
+  var samplebg = 255;
 
 //drawing options
   var mode = 1;
@@ -55,6 +61,8 @@ function setup(){
   noStroke();
   fill(255);
   rect(canvasx,canvasst,canvasl,canvash);
+  
+  img = loadImage('https://vmfa-dmz.piction.com/piction/ump.di?e=E5F7FEC01FD51B1FF8C0C476E82E0CFCF93BAA058F38875089719D6387FE738D&s=21&se=458323871&v=&f=85_451_v1_KW_200804_w.jpg');
 }
 
 function draw(){
@@ -103,8 +111,13 @@ noStroke();
 rect(0,0,300,tbh);
 
 //sample
+if(r>220 && g>220 && b>220){
+  samplebg = 0;
+}else{
+  samplebg = 255;
+}
 rectMode(CENTER);
-fill(255);
+fill(samplebg);
 rect(samplelocX,samplelocY,100,100);
 rectMode(CORNER);
 if(mode==1){
@@ -118,19 +131,6 @@ if(mode==1){
   }
  }
   if(mode==3){
-   /*
-    for (var sa=0; sa<20; sa++){
-
-    fill(r,g,b,255/(1.25*s));
-    ellipse(samplelocX,samplelocY,sa,sa);
-    ellipse(samplelocX,samplelocY,sa-5,sa-5);
-    ellipse(samplelocX,samplelocY,sa+5,sa+5);
-    fill(r,g,b);
-    ellipse(samplelocX,samplelocY,3,3); 
-    ellipse(samplelocX,samplelocY,2,2);
-    ellipse(samplelocX,samplelocY,2,2);
-      }
-     */
      
      for (var sa=0; sa<20; sa++){
 
