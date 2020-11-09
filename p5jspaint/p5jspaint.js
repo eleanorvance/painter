@@ -1,6 +1,3 @@
-
-
-
 var high = 600;
 var wide = 1200;
 //canvas
@@ -30,8 +27,8 @@ var tbh = high;
 //
  var slidewide = 40;
 //color buttons
-  var rb=255/2+csX;
-  var bb=255/2+csX;
+  var rb=240+csX;
+  var bb=150+csX;
   var gb=255/2+csX;
 //COLORS
   var r=255/2;
@@ -58,11 +55,11 @@ var tbh = high;
 
 function setup(){
   createCanvas(1200,600);
+  
   noStroke();
   fill(255);
   rect(canvasx,canvasst,canvasl,canvash);
-  
-  img = loadImage('https://vmfa-dmz.piction.com/piction/ump.di?e=E5F7FEC01FD51B1FF8C0C476E82E0CFCF93BAA058F38875089719D6387FE738D&s=21&se=458323871&v=&f=85_451_v1_KW_200804_w.jpg');
+ 
 }
 
 function draw(){
@@ -240,5 +237,16 @@ if(dist(mouseX,mouseY,csX+csl-20,modeY)<40 && mouseIsPressed){
 }
 rectMode(CORNER);  
 
+
   
+}
+
+function mousePressed(){
+  if(mouseX<50 && mouseY<50){
+let pic = get(canvasx,canvasst,canvasl,canvash);
+  pic.save('myPaintng.jpg');
+  noLoop();
+  }else{
+    loop();
+  }
 }
