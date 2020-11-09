@@ -106,6 +106,14 @@ function draw(){
 fill(150);
 noStroke();
 rect(0,0,300,tbh);
+//save button
+
+fill(0);
+rect(10,10,40,40);
+fill(255);
+triangle(10,30,50,30,30,50);
+rect(20,10,20,25);
+
 
 //sample
 if(r>220 && g>220 && b>220){
