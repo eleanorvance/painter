@@ -46,7 +46,7 @@ var tbh = high;
   var num=20;
 
 //drawing options
-  var mode = 3;
+  var mode = 1;
 
 
 
