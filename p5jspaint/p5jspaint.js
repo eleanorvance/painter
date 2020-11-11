@@ -51,18 +51,44 @@ var tbh = high;
 //drawing options
   var mode = 1;
 
-
+//BACKGROUND
+  //mode
+ var bg;
+ //center
+ var bgX = wide/2 +150;
+ var bgY = high/2;
 
 function setup(){
   createCanvas(1200,600);
   
   noStroke();
   fill(255);
-  rect(canvasx,canvasst,canvasl,canvash);
- 
+  //rect(canvasx,canvasst,canvasl,canvash);
+  
+  bg = int(random(1,3));
+  
+
 }
 
 function draw(){
+  imageMode(CENTER);
+    if (bg==1){
+  loadImage('data/twombley_synopsis1.png', img1 =>  {
+    
+    image(img1,bgX,bgY,655,500);
+      });
+    bg=0;
+  }
+  if(bg==2){
+    loadImage('data/bouguereau_wave2.png', img2 =>  {
+    
+    image(img2,bgX,bgY,662,500);
+      });
+    bg=0;
+  }
+  
+ 
+
  rad = random(-size,size);
   theta = random(TWO_PI);
   var glitterX = mouseX + rad * cos(theta);
@@ -252,7 +278,7 @@ rectMode(CORNER);
 function mousePressed(){
   if(mouseX<50 && mouseY<50){
 let pic = get(canvasx,canvasst,canvasl,canvash);
-  pic.save('myPainting.jpg');
+  pic.save('myPainting.png');
   noLoop();
   }else{
     loop();
