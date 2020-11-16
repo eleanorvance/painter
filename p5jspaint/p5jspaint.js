@@ -1,4 +1,13 @@
-var high = 600;
+//https://git.io/JkL4g
+
+function preload(){
+  img2 = loadImage('data/bouguereau_wave2.png');
+  
+  mode4 = loadImage('data/pinkpearl.png');
+  
+}
+
+var high = 650;
 var wide = 1200;
 //canvas
 var  canvasx=300;
@@ -56,34 +65,49 @@ var tbh = high;
  var bg;
  //center
  var bgX = wide/2 +150;
- var bgY = high/2;
+ var bgY = high/2-40;
+ //image size
+ var iwide;
+ var ihigh=500;
+ 
 
 function setup(){
-  createCanvas(1200,600);
+  createCanvas(1200,650);
   
   noStroke();
   fill(255);
-  //rect(canvasx,canvasst,canvasl,canvash);
+  rect(canvasx,canvasst,canvasl,canvash);
   
   bg = int(random(1,3));
+  
+  rb = random(csX,csX+255);
+  gb = random(csX,csX+255);
+  bb = random(csX,csX+255);
   
 
 }
 
 function draw(){
+  
   imageMode(CENTER);
     if (bg==1){
   loadImage('data/twombley_synopsis1.png', img1 =>  {
     
     image(img1,bgX,bgY,655,500);
       });
+      
+      img2 = loadImage('data/twombley_synopsis1.png');
+  //caption  
+    loadImage('data/caption1.png', cap1 =>  {
+    
+    image(cap1,bgX,high-75,900,50);
+      });
+    iwide=655;
     bg=0;
   }
-  if(bg==2){
-    loadImage('data/bouguereau_wave2.png', img2 =>  {
-    
+  if(bg==2){    
     image(img2,bgX,bgY,662,500);
-      });
+    iwide=662;
     bg=0;
   }
   
@@ -121,8 +145,33 @@ function draw(){
     fill(gcolorR,gcolorG,gcolorB);
     ellipse(glitterX,glitterY,gn/5,gn/5);     
       }
+      
+  //ERASER
+      }else if(mode==4){
+          for(let i=0; i<size ; i++){
+    
+  var eR = random(-size/2-10,size/2+10);
+  var etheta = random(360);
+  var eX = mouseX + eR * cos(etheta);
+  var eY = mouseY +  eR * sin(etheta);
+  var eW = random(2,3);
+  var eA = 150;
   
-      }
+
+  var picX = eX-bgX+iwide/2;
+  var picY = eY-bgY+ihigh/2;
+  
+  c = img2.get(picX,picY);
+
+  
+  noStroke();
+  fill(c,eA);
+  ellipse(eX,eY,eW,eW);
+    }
+    
+     }
+      
+   //end canvas restrictions
   }
  
   
@@ -175,6 +224,7 @@ if(mode==1){
     ellipse(samplelocX-size/2,samplelocY+size/2,2,2);    
       }
   }
+
       
  
   //color slider
@@ -230,15 +280,15 @@ if (dist(mouseX,mouseY,sizeb,sizeY)<slidewide/2 && mouseIsPressed){
 //SIZE
 size = (dist(csX,sizeY,sizeb,sizeY)/csl)*75;
 
-
-
 //MODE BUTTONS
 var modeY=sizeY+2*csp;
+//vertial space
+var modesp = 75;
 noStroke();
 fill(0);
 //ONE
 ellipse(csX+20,modeY,50,50);
-  if(dist(mouseX,mouseY,csX+20,modeY)<50 && mouseIsPressed){
+  if(dist(mouseX,mouseY,csX+20,modeY)<modesp/2 && mouseIsPressed){
    mode = 1; 
   }
 //TWO
@@ -246,7 +296,7 @@ for(var i=0; i<50; i++){
   fill(0,0,0,255/i);
   ellipse(csX+csl/2,modeY,i,i);
       }
-  if(dist(mouseX,mouseY,csX+csl/2,modeY)<50 && mouseIsPressed){
+  if(dist(mouseX,mouseY,csX+csl/2,modeY)<modesp/2 && mouseIsPressed){
     mode=2;
   }
 //THREE
@@ -254,7 +304,6 @@ rectMode(CENTER);
 noStroke();
 fill(150);
 rect(csX+csl-20,modeY,75,75);
-
 for (var s=0; s<20; s++){
 
     fill(0,255/(1.25*s));
@@ -266,9 +315,18 @@ for (var s=0; s<20; s++){
     ellipse((csX+csl-50),(modeY-20),2,2);
     ellipse((csX+csl-45),(modeY+20),2,2);
       }
-if(dist(mouseX,mouseY,csX+csl-20,modeY)<40 && mouseIsPressed){
+if(dist(mouseX,mouseY,csX+csl-20,modeY)<modesp/2 && mouseIsPressed){
  mode=3; 
 }
+
+//FOUR
+//csX+20
+    
+    image(mode4,csX+20,modeY+modesp,75,75);
+ if(dist(mouseX,mouseY,csX+20,modeY+modesp)<modesp/2 && mouseIsPressed){
+   mode=4;
+ }
+    
 rectMode(CORNER);  
 
 
