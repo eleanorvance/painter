@@ -5,6 +5,7 @@ function preload(){
   
   mode4 = loadImage('data/pinkpearl.png');
   
+  seurat = loadImage('data/seurat.jpg');
 }
 
 var high = 650;
@@ -58,7 +59,7 @@ var tbh = high;
   var samplebg = 255;
 
 //drawing options
-  var mode = 1;
+  var mode = 6;
 
 //BACKGROUND
   //mode
@@ -120,6 +121,18 @@ function draw(){
   var gcolorR = r + random(-25,25);
   var gcolorG = g + random(-25,25);
   var gcolorB = b + random(-25,25);
+  
+//variables for erase and point
+  var eR;
+  var etheta;
+  var eX;
+  var eY;
+  var eW;
+  var eA;
+  
+
+  var picX = eX-bgX+iwide/2;
+  var picY = eY-bgY+ihigh/2;
     
 //MOUSE PAINT
   if(mouseX>canvasx && mouseX<canvasx+canvasl && mouseY>canvasst && mouseY<canvash && mouseIsPressed){
@@ -150,16 +163,15 @@ function draw(){
       }else if(mode==4){
           for(let i=0; i<size ; i++){
     
-  var eR = random(-size/2-10,size/2+10);
-  var etheta = random(360);
-  var eX = mouseX + eR * cos(etheta);
-  var eY = mouseY +  eR * sin(etheta);
-  var eW = random(2,3);
-  var eA = 150;
-  
+   eR = random(-size/2-10,size/2+10);
+  etheta = random(360);
+  eX = mouseX + eR * cos(etheta);
+  eY = mouseY +  eR * sin(etheta);
+  eW = random(2,3);
+  eA = 150;  
 
-  var picX = eX-bgX+iwide/2;
-  var picY = eY-bgY+ihigh/2;
+  picX = eX-bgX+iwide/2;
+  picY = eY-bgY+ihigh/2;
   
   c = img2.get(picX,picY);
 
@@ -169,8 +181,75 @@ function draw(){
   ellipse(eX,eY,eW,eW);
     }
     
-     }
+     }else if(mode==5){
+//FIVE mouse
+       ellipse(300,300,300,300);
+     }else if(mode==6){
+//POINTILLISM mouse
+  for(let r=0;r<5;r++){
+ //REDS
+    rR = random(-size/2,size/2);
+    rtheta = random(360);
+         var rR = random(-size/2,size/2);
+        var rtheta = random(360);
+    rX = mouseX + rR * cos(rtheta);
+    rY = mouseY +  rR * sin(rtheta);
+    let rpicX = rX-bgX+iwide/2;
+      let rpicY = rY-bgY+ihigh/2;
+      let c3 = get(rX,rY);
+      let rred = red(c3)+random(-10,10);
+      let rgreen = green(c3)+random(-5,5);
+      let rblue = blue(c3)+random(-5,5);
+       let rW = random(2,7);
       
+      fill(rred,rgreen,rblue);
+         ellipse(rX,rY,rW,rW/2);
+      
+      
+  }
+       for(let p=0; p<10; p++){
+         
+    eR = random(-size/2,size/2);
+    etheta = random(360);
+         var pR = random(-size/2,size/2);
+        var ptheta = random(360);
+    eX = mouseX + eR * cos(etheta);
+    eY = mouseY +  eR * sin(etheta);
+        var pY = mouseY +  pR * sin(ptheta);
+        var pX = mouseX + pR * cos(ptheta);
+    
+    eW = random(2,10);
+      
+
+  picX = eX-bgX+iwide/2;
+  picY = eY-bgY+ihigh/2;
+      
+  
+  c = get(eX,eY);
+  let pred = red(c)-10;
+  let pgreen = green(c)-10;
+  let pblue = blue(c)-10;
+  
+      let ppicX = pX-bgX+iwide/2;
+      let ppicY = pY-bgY+ihigh/2;
+      let c2 = get(pX,pY);
+      let pred2 = red(c2)+random(-10,10);
+      let pgreen2 = green(c2)+random(-10,10);
+      let pblue2 = blue(c2)+random(-20,20);
+      
+         
+
+         fill(pred2,pgreen2,pblue2);
+         ellipse(pX,pY,eW,eW/2);
+         
+         fill(pred,pgreen,pblue);
+         ellipse(eX,eY,eW,eW/2);
+         
+         
+         
+       }
+     }
+   
    //end canvas restrictions
   }
  
@@ -319,6 +398,7 @@ if(dist(mouseX,mouseY,csX+csl-20,modeY)<modesp/2 && mouseIsPressed){
  mode=3; 
 }
 
+
 //FOUR
 //csX+20
     
@@ -326,6 +406,17 @@ if(dist(mouseX,mouseY,csX+csl-20,modeY)<modesp/2 && mouseIsPressed){
  if(dist(mouseX,mouseY,csX+20,modeY+modesp)<modesp/2 && mouseIsPressed){
    mode=4;
  }
+ 
+//FIVE BUTTON
+if(dist(mouseX,mouseY,csX+20+modesp,modeY+modesp)<modesp/2 && mouseIsPressed){
+  mode = 5;
+}
+//POINTILLISM BUTTON
+
+image(seurat,csX+3*modesp,modeY+modesp,50,51);
+if(dist(mouseX,mouseY,csX+3*modesp,modeY+modesp)<modesp/2 && mouseIsPressed){
+  mode=6;
+}
     
 rectMode(CORNER);  
 
