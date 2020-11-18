@@ -6,6 +6,8 @@ function preload(){
   mode4 = loadImage('data/pinkpearl.png');
   
   seurat = loadImage('data/seurat.jpg');
+  
+  mode5 = loadImage('data/sparkleeraser.png');
 }
 
 var high = 650;
@@ -59,7 +61,7 @@ var tbh = high;
   var samplebg = 255;
 
 //drawing options
-  var mode = 6;
+  var mode = 1;
 
 //BACKGROUND
   //mode
@@ -182,8 +184,32 @@ function draw(){
     }
     
      }else if(mode==5){
-//FIVE mouse
-       ellipse(300,300,300,300);
+//SPARKLE ERASER mouse
+       
+       rad = random(-size,size);
+  theta = random(TWO_PI);
+  let glitterX = mouseX + rad * cos(theta);
+  let glitterY = mouseY + rad * sin(theta);
+  let picX = glitterX-bgX+iwide/2;
+  let picY = glitterY-bgY+ihigh/2;
+  let c = img2.get(picX,picY);
+  let gcolorR = red(c) + random(-10,10);
+  let gcolorG = green(c) + random(-10,10);
+  let gcolorB = blue(c) + random(-10,10); 
+  
+    
+  for (let gn=0; gn<random(10,30); gn++){
+
+    fill(gcolorR,gcolorG,gcolorB,255/(1.25*gn));
+    ellipse(glitterX,glitterY,gn,gn);
+    fill(gcolorR+20,gcolorG+20,gcolorB+20);
+    ellipse(glitterX,glitterY,gn/5,gn/5);     
+      }
+
+      
+       
+       
+       
      }else if(mode==6){
 //POINTILLISM mouse
   for(let r=0;r<5;r++){
@@ -407,8 +433,9 @@ if(dist(mouseX,mouseY,csX+csl-20,modeY)<modesp/2 && mouseIsPressed){
    mode=4;
  }
  
-//FIVE BUTTON
-if(dist(mouseX,mouseY,csX+20+modesp,modeY+modesp)<modesp/2 && mouseIsPressed){
+//SPARKLE ERASER BUTTON
+    image(mode5,csX+csl/2,modeY+modesp-10,100,100);
+  if(dist(mouseX,mouseY,csX+csl/2,modeY+modesp)<modesp/2 && mouseIsPressed){
   mode = 5;
 }
 //POINTILLISM BUTTON
