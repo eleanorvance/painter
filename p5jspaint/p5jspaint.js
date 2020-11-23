@@ -8,6 +8,10 @@ function preload(){
   seurat = loadImage('data/seurat.jpg');
   
   mode5 = loadImage('data/sparkleeraser.png');
+  
+  mode7 = loadImage('data/dropper.png');
+  
+  bottle = loadImage('data/bottleempty3.png');
 }
 
 var high = 650;
@@ -252,16 +256,16 @@ function draw(){
       
   
   c = get(eX,eY);
-  let pred = red(c)-10;
-  let pgreen = green(c)-10;
-  let pblue = blue(c)-10;
+  let pred = red(c);
+  let pgreen = green(c);
+  let pblue = blue(c);
   
       let ppicX = pX-bgX+iwide/2;
       let ppicY = pY-bgY+ihigh/2;
       let c2 = get(pX,pY);
-      let pred2 = red(c2)+random(-10,10);
-      let pgreen2 = green(c2)+random(-10,10);
-      let pblue2 = blue(c2)+random(-20,20);
+      let pred2 = red(c2)+random(-5,5);
+      let pgreen2 = green(c2)+random(-5,5);
+      let pblue2 = blue(c2)+random(-10,10);
       
          
 
@@ -274,6 +278,14 @@ function draw(){
          
          
        }
+     }else if(mode==7){
+       
+       let drop=get(mouseX,mouseY);
+       
+       rb = red(drop)+csX;
+       gb = green(drop)+csX;
+       bb = blue(drop)+csX;
+       
      }
    
    //end canvas restrictions
@@ -329,6 +341,18 @@ if(mode==1){
     ellipse(samplelocX-size/2,samplelocY+size/2,2,2);    
       }
   }
+ if(mode==7){
+   
+   let bot = get(mouseX,mouseY);
+   let rbot = red(bot);
+   let gbot = green(bot);
+   let bbot = blue(bot);
+   fill(rbot,gbot,bbot);
+   rectMode(CENTER);
+   rect(samplelocX,samplelocY,100,100);
+   image(bottle,samplelocX,samplelocY,100,100);
+   
+ }
 
       
  
@@ -444,11 +468,15 @@ image(seurat,csX+3*modesp,modeY+modesp,50,51);
 if(dist(mouseX,mouseY,csX+3*modesp,modeY+modesp)<modesp/2 && mouseIsPressed){
   mode=6;
 }
-    
-rectMode(CORNER);  
 
+//7 EYEDROPPER
+if(dist(mouseX,mouseY,csX+20,modeY+2*modesp)<modesp/2 && mouseIsPressed){
+  mode = 7;
+}
 
-  
+image(mode7, csX+20,modeY+2*modesp,60,60);
+
+rectMode(CORNER);    
 }
 
 function mousePressed(){
