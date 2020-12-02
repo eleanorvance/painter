@@ -3,8 +3,6 @@
 function preload(){
   mundi = loadImage('data/mundi.png');
   
- boug = loadImage('data/bouguereau_wave2.png');
-  
   mode4 = loadImage('data/pinkpearl.png');
   
   seurat = loadImage('data/seurat.jpg');
