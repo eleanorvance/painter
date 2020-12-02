@@ -1,7 +1,9 @@
 //https://git.io/JkL4g
 
 function preload(){
-  img2 = loadImage('data/bouguereau_wave2.png');
+  mundi = loadImage('data/mundi.png');
+  
+ boug = loadImage('data/bouguereau_wave2.png');
   
   mode4 = loadImage('data/pinkpearl.png');
   
@@ -12,6 +14,16 @@ function preload(){
   mode7 = loadImage('data/dropper.png');
   
   bottle = loadImage('data/bottleempty3.png');
+  
+  renoir = loadImage('data/renoir.png');
+  
+  graph = loadImage('data/graph.png');
+  
+  picasso = loadImage('data/picasso.png');
+  
+  rothko = loadImage('data/rothko.png');
+  
+  toter = loadImage('data/toter.png');
 }
 
 var high = 650;
@@ -72,7 +84,7 @@ var tbh = high;
  var bg;
  //center
  var bgX = wide/2 +150;
- var bgY = high/2-40;
+ var bgY = high/2;
  //image size
  var iwide;
  var ihigh=500;
@@ -85,7 +97,7 @@ function setup(){
   fill(255);
   rect(canvasx,canvasst,canvasl,canvash);
   
-  bg = int(random(1,3));
+  bg = int(random(1,6));
   
   rb = random(csX,csX+255);
   gb = random(csX,csX+255);
@@ -98,23 +110,48 @@ function draw(){
   
   imageMode(CENTER);
     if (bg==1){
-  loadImage('data/twombley_synopsis1.png', img1 =>  {
-    
-    image(img1,bgX,bgY,655,500);
-      });
-      
-      img2 = loadImage('data/twombley_synopsis1.png');
-  //caption  
-    loadImage('data/caption1.png', cap1 =>  {
-    
-    image(cap1,bgX,high-75,900,50);
-      });
-    iwide=655;
+  noStroke();
+  fill(255);
+  rect(canvasx,canvasst,canvasl,canvash);
+      image(mundi,bgX,bgY,340,500);    
+     img2 = mundi;
+    iwide=340;
     bg=0;
   }
-  if(bg==2){    
-    image(img2,bgX,bgY,662,500);
-    iwide=662;
+  if(bg==2){  
+ noStroke();
+  fill(255);
+  rect(canvasx,canvasst,canvasl,canvash);
+    image(rothko,bgX,bgY,436,500);
+    img2 = rothko;
+    iwide=436;
+    bg=0;
+  }
+  if(bg==3){
+ noStroke();
+  fill(255);
+  rect(canvasx,canvasst,canvasl,canvash);
+    image(renoir,bgX,bgY,671,500);
+    img2=renoir;
+    iwide=671;
+    bg=0;
+  }
+  if(bg==4){
+noStroke();
+  fill(255);
+  rect(canvasx,canvasst,canvasl,canvash);
+    image(graph,bgX,bgY,900,500);
+    img2=graph;
+    iwide=900;
+    bg=0;
+  }
+  if(bg==5){
+noStroke();
+  fill(255);
+  rect(canvasx,canvasst,canvasl,canvash);
+    image(picasso,bgX,bgY,500,500);
+    img2 = picasso;
+    iwide = 500;
     bg=0;
   }
   
@@ -295,16 +332,20 @@ function draw(){
  
   
 //toolbar
-fill(150);
+fill(250,200,50);
 noStroke();
 rect(0,0,300,tbh);
 //save button
 
+//DOWNLOAD
 fill(0);
-rect(10,10,40,40);
+rect(240,10,40,40);
 fill(255);
-triangle(10,30,50,30,30,50);
-rect(20,10,20,25);
+triangle(240,30,280,30,260,50);
+rect(250,10,20,25);
+
+//TRASH
+image(toter,25,25,50,50);
 
 
 //sample
@@ -431,7 +472,7 @@ for(var i=0; i<50; i++){
 //THREE
 rectMode(CENTER);
 noStroke();
-fill(150);
+fill(250,200,50);
 rect(csX+csl-20,modeY,75,75);
 for (var s=0; s<20; s++){
 
@@ -477,14 +518,24 @@ if(dist(mouseX,mouseY,csX+20,modeY+2*modesp)<modesp/2 && mouseIsPressed){
 image(mode7, csX+20,modeY+2*modesp,60,60);
 
 rectMode(CORNER);    
+
+
 }
 
 function mousePressed(){
-  if(mouseX<50 && mouseY<50){
+  if(dist(mouseX,mouseY,240,30)<40){
 let pic = get(canvasx,canvasst,canvasl,canvash);
   pic.save('myPainting.png');
   noLoop();
   }else{
     loop();
   }
+  
+  if(mouseX<60 && mouseX>10 && mouseY<60 && mouseY>10){
+    bg=int(random(1,6));
+    noLoop();
+  }
+  
+  
+  
 }
