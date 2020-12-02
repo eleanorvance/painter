@@ -343,7 +343,7 @@ triangle(240,30,280,30,260,50);
 rect(250,10,20,25);
 
 //TRASH
-image(toter,25,25,50,50);
+image(toter,25,30,60,60);
 
 
 //sample
